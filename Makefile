@@ -1,5 +1,5 @@
 OBJS=Main.o
-CPPFLAGS=$(INCLUDE) -std=c++14 -MD
+CPPFLAGS=$(INCLUDE) -std=c++14 -MMD
 
 all : $(OBJS)
 	$(CXX) -o Main $(LDFLAGS) $(OBJS)
