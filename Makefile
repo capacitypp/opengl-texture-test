@@ -1,13 +1,24 @@
 OBJS=Main.o
-CPPFLAGS=$(INCLUDE) -std=c++14 -MMD
+OBJPATHS=$(addprefix $(BUILDPATH)/, $(OBJS))
+CPPFLAGS=$(INCLUDE) -Wall -O2 -std=c++14 -MMD
+LDFLAGS=
+BUILDPATH=./build
+CXX=ccache clang++
+TARGET=Main
 
-all : $(OBJS)
-	$(CXX) -o Main $(LDFLAGS) $(OBJS)
+all : makefolder $(OBJPATHS)
+	$(CXX) -o $(TARGET) $(LDFLAGS) $(OBJPATHS)
+
+$(BUILDPATH)/%.o : %.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CPPFLAGS) -o $@ -c $<
+
+makefolder :
+	@mkdir -p $(BUILDPATH)
 
 clean :
-	$(RM) *.o
-	$(RM) Main
-	$(RM) *.d
+	$(RM) $(TARGET)
+	$(RM) -r -f $(BUILDPATH)
 
--include *.d
+-include $(BUILDPATH)/*.d
 
