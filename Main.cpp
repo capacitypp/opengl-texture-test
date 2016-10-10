@@ -1,12 +1,17 @@
 #include <iostream>
+#include <vector>
 
 #include <GL/glut.h>
+
+#include "Image.hpp"
 
 using namespace std;
 
 int width = 640;
 int height = 480;
 double angle = 0.0;
+
+vector<Image*> imagePtrs;
 
 void display(void)
 {
@@ -72,6 +77,13 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 
+	for (int i = 1; i <= 3; i++) {
+		string fpath;
+		fpath += "./data/blockDirt";
+		fpath += to_string(i);
+		fpath += ".ppm";
+		imagePtrs.push_back(new Image(fpath));
+	}
 
 	glutInitWindowSize(width, height);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
