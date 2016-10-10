@@ -1,2 +1,3 @@
-# gpp-template
-g++ template repository
+# opengl-texture-test
+Measure FPS
+
