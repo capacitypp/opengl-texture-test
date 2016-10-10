@@ -4,14 +4,27 @@
 
 using namespace std;
 
+int width = 640;
+int height = 480;
+
 void display(void)
 {
-
+	glClear(GL_COLOR_BUFFER_BIT);
+	glLoadIdentity();
+	glColor3d(1.0, 0.0, 0.0);
+	glRotated(30, 1.0, 0.0, 0.0);
+	glRotated(30, 0.0, 1.0, 0.0);
+	glutWireCube(100.0);
+	glutSwapBuffers();
 }
 
 void resize(int w, int h)
 {
-
+	glViewport(0, 0, w, h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-width / 2.0, width / 2.0, -height / 2.0, height / 2.0, -1000.0, 1000.0);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -31,12 +44,12 @@ void keyboardup(unsigned char key, int x, int y)
 
 void idle(void)
 {
-
+	glutPostRedisplay();
 }
 
 void init(void)
 {
-
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 }
 
 void print_information(void)
@@ -58,7 +71,7 @@ int main(int argc, char** argv)
 	glutInit(&argc, argv);
 
 
-	glutInitWindowSize(640, 480);
+	glutInitWindowSize(width, height);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
 	glutCreateWindow(argv[0]);
