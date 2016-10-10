@@ -6,6 +6,7 @@ using namespace std;
 
 int width = 640;
 int height = 480;
+double angle = 0.0;
 
 void display(void)
 {
@@ -13,7 +14,8 @@ void display(void)
 	glLoadIdentity();
 	glColor3d(1.0, 0.0, 0.0);
 	glRotated(30, 1.0, 0.0, 0.0);
-	glRotated(30, 0.0, 1.0, 0.0);
+	glRotated(angle, 0.0, 1.0, 0.0);
+	angle += 0.5;
 	glutWireCube(100.0);
 	glutSwapBuffers();
 }
